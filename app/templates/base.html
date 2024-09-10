@@ -93,7 +93,8 @@
         {% endif %}
     {% endwith %}
 
-    <div id="toast-container" class="fixed top-4 right-4 z-50"></div>
+    <!-- Replace the existing toast-container div with this -->
+    <div id="toast-container" class="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50"></div>
 
     <script>
       document.addEventListener('DOMContentLoaded', function() {
@@ -102,12 +103,20 @@
 
         flashMessages.forEach(function([category, message]) {
           const toast = document.createElement('div');
-          toast.className = `bg-${category === 'error' ? 'red' : 'green'}-500 text-white px-4 py-2 rounded shadow-lg mb-2`;
+          toast.className = `bg-${category === 'error' ? 'red' : 'green'}-500 text-white px-6 py-3 rounded-full shadow-lg mb-2 text-center`;
+          toast.style.minWidth = '300px'; // Ensure a minimum width for better readability
           toast.textContent = message;
           toastContainer.appendChild(toast);
 
+          // Fade in animation
+          toast.style.opacity = '0';
+          toast.style.transition = 'opacity 0.5s ease-in-out';
+          setTimeout(() => { toast.style.opacity = '1'; }, 10);
+
+          // Remove toast after 5 seconds with fade out animation
           setTimeout(function() {
-            toast.remove();
+            toast.style.opacity = '0';
+            setTimeout(() => { toast.remove(); }, 500);
           }, 5000);
         });
       });
