@@ -26,22 +26,22 @@
 freeaifinder/
 │
 ├── app/
-│   ├── __init__.py
-│   ├── models.py
-│   ├── routes.py
-│   ├── forms.py
-│   ├── static/
-│   │   ├── css/
-│   │   │   └── custom.css
+│   ├── __init__.py # app initialization
+│   ├── routes.py # routes for the app
+│   ├── data_service.py # data service for the app
+│   ├── forms.py # forms for the app
+│   ├── static/ # static files for the app
+│   │   ├── css/ # css files for the app
+│   │   │   └── custom.css # custom css for the app
 │   │   ├── js/
 │   │   └── images/
 │   └── templates/
-│       ├── base.html
-│       ├── index.html
-│       ├── tool_listing.html
-│       └── tool_details.html
+│       ├── base.html # base template for all pages
+│       ├── about.html # about page
+│       ├── index.html # home page
+│       ├── submission.html # submission page
+│       └── tool_details.html # tool details page
 │
-├── migrations/
 ├── .env.template
 ├── venv/ # local virtual environment
 ├── config.py
