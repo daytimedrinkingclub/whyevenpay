@@ -1,13 +1,14 @@
-<div class="container mx-auto flex justify-between items-center">
-    <div class="flex items-center space-x-6">
-        <a href="/">
-            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Why Even Pay?" width="134" height="116">
-        </a>
-        <nav class="space-x-4"> 
-            <a href="/about" class="hover:underline text-header-colors font-['Fredoka'] text-[40px] font-semibold leading-[48.4px]">About</a>
-            <a href="/submissions" class="hover:underline text-header-colors font-['Fredoka'] text-[40px] font-semibold leading-[48.4px]">Submit</a>
-            <a href="https://okat.store" class="hover:underline text-header-colors font-['Fredoka'] text-[40px] font-semibold leading-[48.4px]">Merch</a>
-        </nav>
-    </div>
-    {% include 'components/search.html' %}
+<div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
+    <a href="/" class="mb-4 md:mb-0">
+        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Why Even Pay?" width="134" height="116">
+    </a>
+    <nav class="flex flex-row gap-4 md:space-y-0 md:space-x-8">
+        <a href="/about"
+            class="hover:underline text-header-colors font-['Fredoka'] text-[24px] md:text-[40px] font-semibold leading-[29.04px] md:leading-[48.4px]">About</a>
+        <a href="/submissions"
+            class="hover:underline text-header-colors font-['Fredoka'] text-[24px] md:text-[40px] font-semibold leading-[29.04px] md:leading-[48.4px]">Submit</a>
+        <a href="https://okat.store" target="_blank"
+            class="hover:underline text-header-colors font-['Fredoka'] text-[24px] md:text-[40px] font-semibold leading-[29.04px] md:leading-[48.4px]">Merch</a>
+    </nav>
+    <!-- {% include 'components/search.html' %} -->
 </div>
