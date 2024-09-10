@@ -1,14 +1,48 @@
 <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
     <a href="/" class="mb-4 md:mb-0">
-        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Why Even Pay?" width="134" height="116">
+        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Why Even Pay?" width="100" height="87">
     </a>
-    <nav class="flex flex-row gap-4 md:space-y-0 md:space-x-8">
-        <a href="/about"
-            class="hover:underline text-header-colors font-['Fredoka'] text-[24px] md:text-[40px] font-semibold leading-[29.04px] md:leading-[48.4px]">About</a>
-        <a href="/submissions"
-            class="hover:underline text-header-colors font-['Fredoka'] text-[24px] md:text-[40px] font-semibold leading-[29.04px] md:leading-[48.4px]">Submit</a>
-        <a href="https://okat.store" target="_blank"
-            class="hover:underline text-header-colors font-['Fredoka'] text-[24px] md:text-[40px] font-semibold leading-[29.04px] md:leading-[48.4px]">Merch</a>
+    <nav class="flex flex-col md:flex-row items-center gap-4 md:space-y-0 md:space-x-8">
+        <div class="flex flex-row gap-4 md:gap-8">
+            <a href="/about"
+                class="hover:underline text-header-colors font-['Fredoka'] text-[20px] md:text-[28px] font-semibold leading-[24px] md:leading-[34px]">About</a>
+            <div class="relative">
+                <a href="https://okat.store" target="_blank"
+                    class="hover:underline text-header-colors font-['Fredoka'] text-[20px] md:text-[28px] font-semibold leading-[24px] md:leading-[34px] merch-link">Merch</a>
+                <span
+                    class="absolute left-1/2 transform -translate-x-1/2 mt-10 opacity-0 transition-opacity duration-300 ease-in-out tshirt-emoji text-3xl">👕</span>
+            </div>
+        </div>
+        <a href="/submit-tool"
+            class="bg-blue-500 hover:bg-blue-600 text-white font-['Fredoka'] text-[20px] md:text-[28px] font-semibold leading-[24px] md:leading-[34px] px-6 py-2 rounded-full inline-flex items-center">
+            Submit tool
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 ml-2 animate-pulse" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+            </svg>
+        </a>
     </nav>
     <!-- {% include 'components/search.html' %} -->
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const merchLink = document.querySelector('.merch-link');
+        const tshirtEmoji = document.querySelector('.tshirt-emoji');
+        let timeoutId;
+
+        merchLink.addEventListener('mouseenter', function () {
+            tshirtEmoji.style.opacity = '1';
+            clearTimeout(timeoutId);
+            timeoutId = setTimeout(() => {
+                tshirtEmoji.style.opacity = '0';
+            }, 2500);
+        });
+
+        merchLink.addEventListener('mouseleave', function () {
+            clearTimeout(timeoutId);
+            tshirtEmoji.style.opacity = '0';
+        });
+    });
+</script>

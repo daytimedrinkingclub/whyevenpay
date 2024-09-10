@@ -1,67 +1,42 @@
 from flask import current_app
 
 def get_tools(offset=0, limit=10):
-    """
-    Retrieve Tool entries from the database with pagination.
-    """
-    response = current_app.supabase.table('Tool').select('*').range(offset, offset + limit - 1).execute()
+    response = current_app.supabase.table('Tool').select('*, ToolCategory(name, meta)').range(offset, offset + limit - 1).execute()
     return response.data
 
 def get_total_tools_count():
-    """
-    Get the total count of tools in the database.
-    """
     response = current_app.supabase.table('Tool').select('count', count='exact').execute()
     return response.count
 
 def get_all_tools():
-    """
-    Retrieve all Tool entries from the database.
-    """
-    response = current_app.supabase.table('Tool').select('*').execute()
+    response = current_app.supabase.table('Tool').select('*, ToolCategory(name, meta)').execute()
     return response.data
 
 def get_tool_by_id(tool_id):
-    """
-    Retrieve a specific Tool by its ID.
-    """
-    response = current_app.supabase.table('Tool').select('*').eq('id', tool_id).execute()
+    response = current_app.supabase.table('Tool').select('*, ToolCategory(name, meta)').eq('id', tool_id).execute()
     return response.data[0] if response.data else None
 
 def create_tool_submission(submission_data):
     """
-    Create a new Tool from submission data and save it to the database.
+    Create a new ToolSubmission from submission data and save it to the database.
     """
-    new_tool = {
+    new_submission = {
         'name': submission_data['name'],
-        'link': submission_data['url'],
         'description': submission_data['description'],
-        'why_pay': submission_data.get('why_pay', ''),
-        'when_pay': submission_data.get('when_to_pay', ''),
-        'why_not_pay': submission_data.get('why_not_pay', '')
+        'website': submission_data['website'],
+        'category': submission_data['category'],
+        'free_features': submission_data['free_features'],
+        'paid_features': submission_data['paid_features'],
+        'why_pay': submission_data['why_pay'],
+        'why_not_pay': submission_data['why_not_pay'],
+        'when_to_pay': submission_data['when_to_pay'],
+        'submitted_by': submission_data['submitted_by'],
+        'is_published': submission_data['is_published'],
+        'logo_public_url': submission_data['logo_public_url']
     }
-    response = current_app.supabase.table('Tool').insert(new_tool).execute()
+    response = current_app.supabase.table('ToolSubmission').insert(new_submission).execute()
     return response.data[0] if response.data else None
 
-def update_tool_submission(submission_id, form_data):
-    """
-    Update an existing Tool with new form data.
-    """
-    updated_data = {
-        'name': form_data['name'],
-        'link': form_data['url'],
-        'description': form_data['description'],
-        'why_pay': form_data.get('why_pay', ''),
-        'when_pay': form_data.get('when_to_pay', ''),
-        'why_not_pay': form_data.get('why_not_pay', ''),
-        'updated_at': 'now()'
-    }
-    response = current_app.supabase.table('Tool').update(updated_data).eq('id', submission_id).execute()
-    return response.data[0] if response.data else None
-
-def delete_tool_submission(submission_id):
-    """
-    Delete a Tool from the database.
-    """
-    response = current_app.supabase.table('Tool').delete().eq('id', submission_id).execute()
-    return response.data[0] if response.data else None
+def get_categories():
+    response = current_app.supabase.table('ToolCategory').select('*').execute()
+    return response.data

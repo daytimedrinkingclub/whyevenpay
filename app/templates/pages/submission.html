@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="text-center text-white mb-12">
-    <h1 class="text-4xl font-bold mb-2">Submit a Tool</h1>
+    <h1 class="text-4xl font-bold mb-2">Submit Tool for Free - Why Even Pay?</h1>
     <p class="text-xl mb-4">Help us grow our database of software solutions</p>
 </div>
 
@@ -11,34 +11,65 @@
         {{ form.hidden_tag() }}
         <div class="mb-4">
             {{ form.name.label(class="block text-gray-700 text-sm font-bold mb-2") }}
-            {{ form.name(class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline") }}
+            {{ form.name(class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight
+            focus:outline-none focus:shadow-outline") }}
         </div>
         <div class="mb-4">
             {{ form.description.label(class="block text-gray-700 text-sm font-bold mb-2") }}
-            {{ form.description(class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", rows="4") }}
-        </div>
-        <div class="mb-4">
-            {{ form.website.label(class="block text-gray-700 text-sm font-bold mb-2") }}
-            {{ form.website(class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline") }}
+            {{ form.description(class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700
+            leading-tight focus:outline-none focus:shadow-outline", rows="4") }}
         </div>
         <div class="mb-4">
             {{ form.category.label(class="block text-gray-700 text-sm font-bold mb-2") }}
-            {{ form.category(class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline") }}
+            {{ form.category(class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight
+            focus:outline-none focus:shadow-outline") }}
+        </div>
+        <div class="flex flex-col md:flex-row mb-4 -mx-2">
+            <div class="w-full md:w-1/2 px-2 mb-4 md:mb-0">
+                {{ form.website.label(class="block text-gray-700 text-sm font-bold mb-2") }}
+                {{ form.website(class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700
+                leading-tight focus:outline-none focus:shadow-outline") }}
+            </div>
+            <div class="w-full md:w-1/2 px-2">
+                {{ form.logo_public_url.label(class="block text-gray-700 text-sm font-bold mb-2") }}
+                {{ form.logo_public_url(class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700
+                leading-tight focus:outline-none focus:shadow-outline") }}
+            </div>
         </div>
         <div class="mb-4">
             {{ form.free_features.label(class="block text-gray-700 text-sm font-bold mb-2") }}
-            {{ form.free_features(class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", rows="4") }}
+            {{ form.free_features(class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700
+            leading-tight focus:outline-none focus:shadow-outline", rows="4") }}
         </div>
         <div class="mb-4">
             {{ form.paid_features.label(class="block text-gray-700 text-sm font-bold mb-2") }}
-            {{ form.paid_features(class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", rows="4") }}
+            {{ form.paid_features(class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700
+            leading-tight focus:outline-none focus:shadow-outline", rows="4") }}
         </div>
-        <div class="mb-6">
+        <div class="mb-4">
             {{ form.why_pay.label(class="block text-gray-700 text-sm font-bold mb-2") }}
-            {{ form.why_pay(class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline", rows="4") }}
+            {{ form.why_pay(class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight
+            focus:outline-none focus:shadow-outline", rows="4") }}
+        </div>
+        <div class="mb-4">
+            {{ form.why_not_pay.label(class="block text-gray-700 text-sm font-bold mb-2") }}
+            {{ form.why_not_pay(class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700
+            leading-tight focus:outline-none focus:shadow-outline", rows="4") }}
+        </div>
+        <div class="mb-4">
+            {{ form.when_to_pay.label(class="block text-gray-700 text-sm font-bold mb-2") }}
+            {{ form.when_to_pay(class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700
+            leading-tight focus:outline-none focus:shadow-outline", rows="4") }}
+        </div>
+        <div class="mb-4">
+            {{ form.submitted_by.label(class="block text-gray-700 text-sm font-bold mb-2") }}
+            {{ form.submitted_by(class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700
+            leading-tight focus:outline-none focus:shadow-outline", type="email") }}
+            <p class="mt-1 text-sm text-gray-500">We will inform you once your tool is published :)</p>
         </div>
         <div class="flex items-center justify-between">
-            {{ form.submit(class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline") }}
+            {{ form.submit(class="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded
+            focus:outline-none focus:shadow-outline cursor-pointer") }}
         </div>
     </form>
 </div>
