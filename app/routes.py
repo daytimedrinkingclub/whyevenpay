@@ -10,6 +10,11 @@ def index():
     tools = get_all_tools()
     return render_template('index.html', title='Home', tools=tools)
 
+
+@bp.route('/about')
+def about():
+    return render_template('about.html', title='About')
+
 @bp.route('/tool/<int:tool_id>')
 def tool_details(tool_id):
     tool = get_tool_by_id(tool_id)
