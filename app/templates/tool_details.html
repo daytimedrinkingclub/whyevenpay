@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="bg-white rounded-lg shadow-lg p-8">
+    <h1 class="text-4xl font-bold text-blue-800 mb-4">{{ tool.name }}</h1>
+    
+    <div class="mb-6">
+        <h2 class="text-2xl font-semibold text-gray-700 mb-2">Description</h2>
+        <p class="text-gray-600">{{ tool.description }}</p>
+    </div>
+
+    <div class="mb-6">
+        <h2 class="text-2xl font-semibold text-gray-700 mb-2">Website</h2>
+        <a href="{{ tool.website }}" class="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">{{ tool.website }}</a>
+    </div>
+
+    <div class="mb-6">
+        <h2 class="text-2xl font-semibold text-gray-700 mb-2">Category</h2>
+        <p class="text-gray-600">{{ tool.category }}</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+        <div class="bg-blue-100 p-6 rounded-lg">
+            <h2 class="text-2xl font-semibold text-blue-800 mb-4">Free Features</h2>
+            <p class="text-gray-700">{{ tool.free_features }}</p>
+        </div>
+        <div class="bg-green-100 p-6 rounded-lg">
+            <h2 class="text-2xl font-semibold text-green-800 mb-4">Paid Features</h2>
+            <p class="text-gray-700">{{ tool.paid_features or 'No paid features listed.' }}</p>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="bg-yellow-100 p-6 rounded-lg">
+            <h2 class="text-2xl font-semibold text-yellow-800 mb-4">Why Pay?</h2>
+            <p class="text-gray-700">{{ tool.why_pay or 'No information available.' }}</p>
+        </div>
+        <div class="bg-purple-100 p-6 rounded-lg">
+            <h2 class="text-2xl font-semibold text-purple-800 mb-4">When to Pay?</h2>
+            <p class="text-gray-700">{{ tool.when_to_pay or 'No information available.' }}</p>
+        </div>
+        <div class="bg-red-100 p-6 rounded-lg">
+            <h2 class="text-2xl font-semibold text-red-800 mb-4">Why Not Pay?</h2>
+            <p class="text-gray-700">{{ tool.why_not_pay or 'No information available.' }}</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
