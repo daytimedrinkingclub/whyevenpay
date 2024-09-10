@@ -37,7 +37,9 @@ freeaifinder/
 │   │   └── images/
 │   └── templates/
 │       ├── base.html
-│       └── index.html
+│       ├── index.html
+│       ├── tool_listing.html
+│       └── tool_details.html
 │
 ├── migrations/
 ├── .env.template
