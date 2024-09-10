@@ -1,12 +1,14 @@
 let offset = 10;
 const limit = 10;
 let totalCount;
+let isLoading = false;
 
 function loadMoreTools() {
-    if (offset >= totalCount) {
+    if (offset >= totalCount || isLoading) {
         return;
     }
 
+    isLoading = true;
     document.getElementById('loading').classList.remove('hidden');
 
     fetch(`/load_more_tools?offset=${offset}&limit=${limit}`)
@@ -31,6 +33,7 @@ function loadMoreTools() {
                 container.appendChild(toolElement);
             });
             offset += tools.length;
+            isLoading = false;
             document.getElementById('loading').classList.add('hidden');
         });
 }
