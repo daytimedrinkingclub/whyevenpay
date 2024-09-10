@@ -7,7 +7,7 @@
 </div>
 
 <div class="bg-white rounded-lg shadow-lg p-8">
-    <form method="POST" action="{{ url_for('main.submit_tool') }}">
+    <form method="POST" action="{{ url_for('main.submit') }}">
         {{ form.hidden_tag() }}
         <div class="mb-4">
             {{ form.name.label(class="block text-gray-700 text-sm font-bold mb-2") }}
