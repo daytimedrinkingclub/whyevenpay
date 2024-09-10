@@ -1,20 +1,13 @@
 <div class="container mx-auto flex justify-between items-center">
     <div class="flex items-center space-x-6">
-        <a href="/" class="text-2xl font-bold" style="width: 134.93px; height: 116.67px; gap: 0px; opacity: 0px;">
-            Why Even Pay?
+        <a href="/">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Why Even Pay?" width="134" height="116">
         </a>
         <nav class="space-x-4"> 
-            <a href="/about" class="hover:underline text-menu-colors">About</a>
-            <a href="/submissions" class="hover:underline text-menu-colors">Submit your tool</a>
-            <a href="https://okat.store" class="hover:underline text-menu-colors">Merch</a>
+            <a href="/about" class="hover:underline text-header-colors font-['Fredoka'] text-[40px] font-semibold leading-[48.4px]">About</a>
+            <a href="/submissions" class="hover:underline text-header-colors font-['Fredoka'] text-[40px] font-semibold leading-[48.4px]">Submit</a>
+            <a href="https://okat.store" class="hover:underline text-header-colors font-['Fredoka'] text-[40px] font-semibold leading-[48.4px]">Merch</a>
         </nav>
     </div>
-    <div class="relative">
-        <input type="text" placeholder="What are you looking for?.." class="py-2 px-4 pr-10 rounded-full bg-gray-200 text-gray-800 focus:outline-none focus:ring-2 focus:ring-yellow-400 w-64">
-        <button class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-yellow-400 rounded-full p-2">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
-        </button>
-    </div>
+    {% include 'components/search.html' %}
 </div>

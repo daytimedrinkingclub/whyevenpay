@@ -34,13 +34,24 @@ freeaifinder/
 │   │   ├── css/ # css files for the app
 │   │   │   └── custom.css # custom css for the app
 │   │   ├── js/
+│   │   │   └── product_list.js # javascript for the app
 │   │   └── images/
 │   └── templates/
 │       ├── base.html # base template for all pages
-│       ├── about.html # about page
-│       ├── index.html # home page
-│       ├── submission.html # submission page
-│       └── tool_details.html # tool details page
+│       ├── components/
+│       │   ├── header.html # header component
+│       │   ├── search.html # search component
+│       │   └── footer.html # footer component
+│       ├── home/ # home page files
+│       │   ├── main.html # home page
+│       │   ├── product_list.html # product list page
+│       │   └── tool_details.html # tool details page
+│       ├── pages/ # other pages
+│       │   ├── about.html # about page
+│       │   ├── index.html # home page
+│       │   ├── submission.html # submission page
+│       │   └── tool_details.html # tool details page
+│       └── index.html # tool details page
 │
 ├── .env.template
 ├── venv/ # local virtual environment

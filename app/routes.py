@@ -21,7 +21,7 @@ def load_more_tools():
 
 @bp.route('/about')
 def about():
-    return render_template('about.html', title='About')
+    return render_template('pages/about.html', title='About')
 
 @bp.route('/tool/<int:tool_id>')
 def tool_details(tool_id):
