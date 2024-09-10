@@ -32,21 +32,27 @@ def tool_details(tool_id):
 def submit():
     form = ToolSubmissionForm()
     if form.validate_on_submit():
-        submission_data = {
-            'name': form.name.data,
-            'description': form.description.data,
-            'website': form.website.data,
-            'category': form.category.data,
-            'free_features': form.free_features.data,
-            'paid_features': form.paid_features.data,
-            'why_pay': form.why_pay.data,
-            'why_not_pay': form.why_not_pay.data,
-            'when_to_pay': form.when_to_pay.data,
-            'submitted_by': form.submitted_by.data,
-            'logo_public_url': form.logo_public_url.data,
-            'is_published': False  # Set to False by default for review
-        }
-        create_tool_submission(submission_data)
-        flash('Your submission has been received and is pending review!')
-        return redirect(url_for('main.index'))
+        try:
+            submission_data = {
+                'name': form.name.data,
+                'description': form.description.data,
+                'website': form.website.data,
+                'category': form.category.data,
+                'free_features': form.free_features.data,
+                'paid_features': form.paid_features.data,
+                'why_pay': form.why_pay.data,
+                'why_not_pay': form.why_not_pay.data,
+                'when_to_pay': form.when_to_pay.data,
+                'submitted_by': form.submitted_by.data,
+                'logo_public_url': form.logo_public_url.data
+            }
+            created_tool = create_tool_submission(submission_data)
+            if created_tool:
+                flash('Your submission has been received and is pending review!', 'success')
+                return redirect(url_for('main.index'))
+            else:
+                flash('An error occurred while submitting your tool. Please try again.', 'error')
+        except Exception as e:
+            flash(f'An error occurred while submitting your tool: {str(e)}', 'error')
+    
     return render_template('pages/submission.html', title='Submit Tool for Free - Why Even Pay?', form=form)
