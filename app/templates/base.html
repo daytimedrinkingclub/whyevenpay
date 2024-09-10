@@ -1,39 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Why Even Pay?</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-T58W554EG0"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-T58W554EG0');
+    </script>
     <script>
         tailwind.config = {
-          theme: {
-            extend: {
-              colors: {
-                'white': '#FFFFFF',
-                'header-colors': '#99EAE5',
-                'custom-blue': '#153681',
-                'gray-300': '#D9D9D9',
-                'blue-400': '#6591F4',
-                'custom-green': '#70B990',
-                'gray-500': '#767779',
-                'custom-orange': '#B94C32',
-                'custom-yellow': '#F0DB1D',
-                'gray-100': '#F2F3F4',
-                'purple-50': '#FEF7FF',
-                'black': '#1E1E1E',
-                'custom-green-transparent': '#70B990E5',
-                'gray-600': '#73767C',
-                'red-300': '#B68B8B',
-                'custom-orange-transparent': '#B94C32E5',
-                'white-transparent': '#FFFFFFE5',
-              }
+            theme: {
+                extend: {
+                    colors: {
+                        'white': '#FFFFFF',
+                        'header-colors': '#99EAE5',
+                        'custom-blue': '#153681',
+                        'gray-300': '#D9D9D9',
+                        'blue-400': '#6591F4',
+                        'custom-green': '#70B990',
+                        'gray-500': '#767779',
+                        'custom-orange': '#B94C32',
+                        'custom-yellow': '#F0DB1D',
+                        'gray-100': '#F2F3F4',
+                        'purple-50': '#FEF7FF',
+                        'black': '#1E1E1E',
+                        'custom-green-transparent': '#70B990E5',
+                        'gray-600': '#73767C',
+                        'red-300': '#B68B8B',
+                        'custom-orange-transparent': '#B94C32E5',
+                        'white-transparent': '#FFFFFFE5',
+                    }
+                }
             }
-          }
         }
-      </script>
+    </script>
     <style>
 
     </style>
@@ -52,6 +63,7 @@
     }
     </script>
 </head>
+
 <body class="flex flex-col min-h-screen">
     <header class="bg-custom-blue text-white p-4">
         {% include 'components/header.html' %}
@@ -65,4 +77,5 @@
         {% include 'components/footer.html' %}
     </footer>
 </body>
+
 </html>
