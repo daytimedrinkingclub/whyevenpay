@@ -1,5 +1,19 @@
 from flask import current_app
 
+def get_tools(offset=0, limit=10):
+    """
+    Retrieve Tool entries from the database with pagination.
+    """
+    response = current_app.supabase.table('Tool').select('*').range(offset, offset + limit - 1).execute()
+    return response.data
+
+def get_total_tools_count():
+    """
+    Get the total count of tools in the database.
+    """
+    response = current_app.supabase.table('Tool').select('count', count='exact').execute()
+    return response.count
+
 def get_all_tools():
     """
     Retrieve all Tool entries from the database.
