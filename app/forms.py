@@ -1,7 +1,11 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, TextAreaField, SubmitField, SelectField
+from wtforms import StringField, TextAreaField, SubmitField, SelectField, PasswordField
 from wtforms.validators import DataRequired, URL, Email, Optional
 from app.data_service import get_categories
+
+class AdminLoginForm(FlaskForm):
+    password = PasswordField('Password', validators=[DataRequired()])
+    submit = SubmitField('Login')
 
 class ToolSubmissionForm(FlaskForm):
     name = StringField('Tool Name', validators=[DataRequired()])

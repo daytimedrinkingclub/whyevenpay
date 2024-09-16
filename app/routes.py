@@ -1,8 +1,18 @@
-from flask import Blueprint, render_template, flash, redirect, url_for, jsonify, request
-from app.forms import ToolSubmissionForm
-from app.data_service import get_tools, get_tool_by_slug, create_tool_submission, get_total_tools_count, get_all_tools, update_tool
+from flask import Blueprint, render_template, flash, redirect, url_for, jsonify, request, session
+from app.forms import ToolSubmissionForm, AdminLoginForm
+from app.data_service import get_tools, get_tool_by_slug, create_tool_submission, get_total_tools_count, get_all_tools, update_tool, delete_tool, restore_tool
+import os
+from functools import wraps
 
 bp = Blueprint('main', __name__)
+
+def admin_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if not session.get('admin_authenticated'):
+            return redirect(url_for('main.admin_login', next=request.url))
+        return f(*args, **kwargs)
+    return decorated_function
 
 @bp.route('/')
 @bp.route('/index')
@@ -60,12 +70,26 @@ def submit():
     
     return render_template('pages/submission.html', title='Submit Tool for Free - Why Even Pay?', form=form)
 
+@bp.route('/admin/login', methods=['GET', 'POST'])
+def admin_login():
+    form = AdminLoginForm()
+    if form.validate_on_submit():
+        if form.password.data == os.environ.get('ADMIN_PASSWORD'):
+            session['admin_authenticated'] = True
+            next_page = request.args.get('next')
+            return redirect(next_page or url_for('main.admin'))
+        else:
+            flash('Invalid password', 'error')
+    return render_template('admin_login.html', form=form)
+
 @bp.route('/admin')
+@admin_required
 def admin():
     tools = get_all_tools()
     return render_template('admin.html', title='Admin Dashboard', tools=tools)
 
 @bp.route('/admin/edit/<string:tool_slug>', methods=['GET', 'POST'])
+@admin_required
 def admin_edit_tool(tool_slug):
     tool = get_tool_by_slug(tool_slug)
     if not tool:
@@ -95,3 +119,31 @@ def admin_edit_tool(tool_slug):
             flash('An error occurred while updating the tool', 'error')
     
     return render_template('pages/edit_tool.html', title='Edit Tool', form=form, tool=tool)
+
+@bp.route('/admin/delete/<tool_name>', methods=['POST'])
+@admin_required
+def admin_delete_tool(tool_name):
+    tool = get_tool_by_slug(tool_name)
+    print(f"Attempting to delete tool: {tool}")
+    if not tool:
+        return jsonify({'success': False, 'message': 'Tool not found'}), 404
+    
+    # Assuming 'tool' is a dictionary with an 'id' key
+    success = delete_tool(tool['id'])
+    
+    if success:
+        return jsonify({'success': True, 'message': 'Tool deleted successfully'})
+    else:
+        return jsonify({'success': False, 'message': 'Error deleting tool'}), 500
+    
+@bp.route('/admin/restore/<tool_slug>', methods=['POST'])
+@admin_required
+def admin_restore_tool(tool_slug):
+    tool = get_tool_by_slug(tool_slug)
+    if not tool:
+        return jsonify({'success': False, 'message': 'Tool not found'}), 404
+
+    # Update is_deleted to False
+    success = restore_tool(tool['id'])
+
+    return jsonify({'success': success})

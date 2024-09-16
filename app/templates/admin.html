@@ -4,9 +4,12 @@
 <div class="container mx-auto px-4 py-8">
     <h1 class="text-3xl font-bold text-white mb-6">Admin Dashboard</h1>
     
-    <div class="mb-4">
+    <div class="mb-4 flex justify-between items-center">
         <a href="{{ url_for('main.submit') }}" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
             Add Tool
+        </a>
+        <a href="{{ url_for('main.admin_login') }}" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">
+            Logout
         </a>
     </div>
 
@@ -24,21 +27,30 @@
                 <tr class="border-b border-gray-200 hover:bg-gray-100">
                     <td class="py-3 px-6 text-left whitespace-nowrap">
                         <span class="font-medium">{{ tool.name }}</span>
+                        {% if tool.is_deleted %}
+                            <span class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded ml-2">Deleted</span>
+                        {% endif %}
                     </td>
                     <td class="py-3 px-6 text-left">
                         <span>{{ tool.description[:100] }}...</span>
                     </td>
                     <td class="py-3 px-6 text-center">
                         <div class="flex item-center justify-center">
-                            <a href="{{ tool.website }}" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 mr-2">
+                            <a href="{{ tool.link }}" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 mr-2">
                                 View
                             </a>
-                            <a href="{{ url_for('main.admin_edit_tool', tool_id=tool.id) }}" class="text-green-600 hover:text-green-800 mr-2">
+                            <a href="{{ url_for('main.admin_edit_tool', tool_slug=tool.slug) }}" class="text-green-600 hover:text-green-800 mr-2">
                                 Edit
                             </a>
-                            <button onclick="confirmDelete({{ tool.id }})" class="text-red-600 hover:text-red-800">
-                                Delete
-                            </button>
+                            {% if tool.is_deleted %}
+                                <button onclick="confirmRestore('{{ tool.slug }}')" class="text-yellow-600 hover:text-yellow-800">
+                                    Restore
+                                </button>
+                            {% else %}
+                                <button onclick="confirmDelete('{{ tool.slug }}')" class="text-red-600 hover:text-red-800">
+                                    Delete
+                                </button>
+                            {% endif %}
                         </div>
                     </td>
                 </tr>
@@ -49,15 +61,29 @@
 </div>
 
 <script>
-function confirmDelete(toolId) {
+function confirmDelete(toolSlug) {
     if (confirm('Are you sure you want to delete this tool?')) {
-        fetch(`/admin/delete/${toolId}`, { method: 'POST' })
+        fetch(`/admin/delete/${toolSlug}`, { method: 'POST' })
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
                     location.reload();
                 } else {
                     alert('Error deleting tool');
+                }
+            });
+    }
+}
+
+function confirmRestore(toolSlug) {
+    if (confirm('Are you sure you want to restore this tool?')) {
+        fetch(`/admin/restore/${toolSlug}`, { method: 'POST' })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    location.reload();
+                } else {
+                    alert('Error restoring tool');
                 }
             });
     }

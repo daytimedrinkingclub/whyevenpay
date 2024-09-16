@@ -1,7 +1,7 @@
 from flask import current_app
 
 def get_tools(offset=0, limit=10):
-    response = current_app.supabase.table('Tool').select('*, ToolCategory(name, meta)').range(offset, offset + limit - 1).execute()
+    response = current_app.supabase.table('Tool').select('*, ToolCategory(name, meta)').eq('is_deleted', False).range(offset, offset + limit - 1).execute()
     return response.data
 
 def get_total_tools_count():
@@ -46,10 +46,18 @@ def update_tool(tool_id, updated_data):
 
 def delete_tool(tool_id):
     try:
-        response = current_app.supabase.table('Tool').delete().eq('id', tool_id).execute()
+        response = current_app.supabase.table('Tool').update({'is_deleted': True}).eq('id', tool_id).execute()
         return True if response.data else False
     except Exception as e:
-        print(f"Error deleting tool from Supabase: {str(e)}")
+        print(f"Error soft deleting tool in Supabase: {str(e)}")
+        return False
+    
+def restore_tool(tool_id):
+    try:
+        response = current_app.supabase.table('Tool').update({'is_deleted': False}).eq('id', tool_id).execute()
+        return True if response.data else False
+    except Exception as e:
+        print(f"Error restoring tool in Supabase: {str(e)}")
         return False
 
 def get_tool_by_slug(slug):
