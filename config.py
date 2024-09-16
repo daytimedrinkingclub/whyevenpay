@@ -9,3 +9,4 @@ class Config:
     SUPABASE_KEY = os.environ.get('SUPABASE_KEY')
     LOGO_DEV_PUBLIC_KEY = os.environ.get('LOGO_DEV_PUBLIC_KEY')
     LOGO_DEV_API_KEY = os.environ.get('LOGO_DEV_API_KEY')
+    ADMIN_PASSWORD = os.environ.get('ADMIN_PASSWORD')

@@ -35,3 +35,27 @@ def create_tool_submission(submission_data):
 def get_categories():
     response = current_app.supabase.table('ToolCategory').select('*').execute()
     return response.data
+
+def update_tool(tool_id, updated_data):
+    try:
+        response = current_app.supabase.table('Tool').update(updated_data).eq('id', tool_id).execute()
+        return response.data[0] if response.data else None
+    except Exception as e:
+        print(f"Error updating tool in Supabase: {str(e)}")
+        return None
+
+def delete_tool(tool_id):
+    try:
+        response = current_app.supabase.table('Tool').delete().eq('id', tool_id).execute()
+        return True if response.data else False
+    except Exception as e:
+        print(f"Error deleting tool from Supabase: {str(e)}")
+        return False
+
+def get_tool_by_slug(slug):
+    try:
+        response = current_app.supabase.table('Tool').select('*, ToolCategory(name, meta)').eq('slug', slug).execute()
+        return response.data[0] if response.data else None
+    except Exception as e:
+        print(f"Error fetching tool by slug from Supabase: {str(e)}")
+        return None

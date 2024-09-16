@@ -1,26 +1,25 @@
-
 body {
     background-color: #1e40af; /* Dark blue background */
     color: white;
     font-family: 'Fredoka', sans-serif;
 }
-.card-container {
+.flipping-card-container {
     perspective: 1000px;
 }
-.card {
+.flipping-card {
     transition: transform 0.6s;
     transform-style: preserve-3d;
 }
-.card:hover {
+.flipping-card:hover {
     transform: rotateY(180deg);
 }
-.card-front, .card-back {
+.flipping-card-front, .flipping-card-back {
     position: absolute;
     width: 100%;
     height: 100%;
     backface-visibility: hidden;
 }
-.card-back {
+.flipping-card-back {
     transform: rotateY(180deg);
 }
 
@@ -28,14 +27,25 @@ body {
     body {
         font-size: 14px;
     }
-    .card-container {
+    .flipping-card-container {
         perspective: 600px;
     }
-    .card-front h2 {
+    .flipping-card-front h2 {
         font-size: 2.5rem;
         line-height: 1.2;
     }
-    .card-back p {
+    .flipping-card-back p {
         font-size: 1rem;
     }
+}
+
+/* Add this to your existing CSS */
+.group:hover .group-hover\:opacity-100 {
+    opacity: 1;
+}
+
+.transition-opacity {
+    transition-property: opacity;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 200ms;
 }
